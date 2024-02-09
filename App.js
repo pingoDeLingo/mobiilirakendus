@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native";
 import Splash from "./src/screens/auth/Splash";
 import Signup from "./src/screens/auth/Signup";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
+
+const IOS_CLIENT_ID = "889267781491-q61okfnjmecstlrgha4rs072iro0c6nv.apps.googleusercontent.com";
+const REVERSED_CLIENT_ID = "com.googleusercontent.apps.889267781491-q61okfnjmecstlrgha4rs072iro0c6nv";
 
 const App = () => {
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: IOS_CLIENT_ID,
+      offlineAccess: true,
+      iosClientId: IOS_CLIENT_ID,
+    });
+  }, [])
   return (
     <SafeAreaView>
       <Signup />

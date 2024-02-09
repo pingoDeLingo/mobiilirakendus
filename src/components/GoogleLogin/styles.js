@@ -3,7 +3,7 @@ import {colors} from '/Users/student/mobiilirakendus/src/utils/colors.js';
 
 export const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.darkGray,
+        backgroundColor: colors.darkBlue,
         padding: 16,
         borderRadius: 14,
         alignItems: 'center',
@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         width: '45%',
         marginBottom: 50,
+        marginTop: 10,
     },
     image: {
         width: 50,
