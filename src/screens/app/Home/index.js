@@ -11,16 +11,23 @@ import ProductHomeItem from "../../../components/ProductHomeItem";
 
 const Home = () => {
     const [selectedCategory, setSelectedCategory] = React.useState();
+    const [keyword, setKeyword] = React.useState();
     const [selectedProducts, setSelectedProducts] = React.useState(products);
 
     useEffect(() => {
-        if (selectedCategory){
+        if (selectedCategory && !keyword){
         const updatedSelectedProducts = products.filter((product) => product?.category === selectedCategory);
         setSelectedProducts(updatedSelectedProducts);
-        } else {
+        } else if (!keyword && !selectedCategory) {
             setSelectedProducts(products);
+        } else if (keyword && !selectedCategory) {
+            const updatedSelectedProducts = products.filter((product) => product?.title.toLowerCase().includes(keyword.toLowerCase()));
+            setSelectedProducts(updatedSelectedProducts);
+        } else if (keyword && selectedCategory) {
+            const updatedSelectedProducts = products.filter((product) => product?.category === selectedCategory && product?.title.toLowerCase().includes(keyword.toLowerCase()));
+            setSelectedProducts(updatedSelectedProducts);
         }
-    }, [selectedCategory]);
+    }, [selectedCategory, keyword]);
     
 
     const renderCategoryItem = ({ item }) => {
@@ -42,7 +49,7 @@ const Home = () => {
     return (
         <SafeAreaView>
         <View style={styles.container}>
-            <Header showSearch={true} title="Find All You Need" />
+            <Header showSearch={true} onSearchKeyword={setKeyword} keyword={keyword} title="Find All You Need" />
             <FlatList showHorizontalScrollIndicator={false} style={styles.list} horizontal data={categories} renderItem={renderCategoryItem} keyExtractor={(item, index) =>
             String(index)} />
             <FlatList numColumns={2} data={selectedProducts} renderItem={renderProductItem} 
