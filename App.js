@@ -15,6 +15,7 @@ import Home from "./src/screens/app/Home";
 import Favorites from "./src/screens/app/Favorites";
 import Profile from "./src/screens/app/Profile";
 import { colors } from "./src/utils/colors";
+import ProductDetails from "./src/screens/app/ProductDetails";
 
 const IOS_CLIENT_ID = "889267781491-ui4bsatr64dgibavabdfjkql9ositd0c.apps.googleusercontent.com";
 const WEB_CLIENT_ID = "889267781491-q61okfnjmecstlrgha4rs072iro0c6nv.apps.googleusercontent.com";
@@ -87,6 +88,7 @@ const App = () => {
         isSignedIn ? (
           <>
           <Stack.Screen name="Tabs" component={Tabs} options={{headerShown: false}} />
+          <Stack.Screen name="ProductDetails" component={ProductDetails} options={{headerShown: false}} />
           </>
         ) : (
           <>
