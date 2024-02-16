@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {View, Text} from "react-native";
 import {styles} from "./styles";
 import Header from "../../../components/Header";
@@ -10,9 +10,24 @@ import { products } from "../../../data/products";
 import ProductHomeItem from "../../../components/ProductHomeItem";
 
 const Home = () => {
+    const [selectedCategory, setSelectedCategory] = React.useState();
+    const [selectedProducts, setSelectedProducts] = React.useState(products);
+
+    useEffect(() => {
+        if (selectedCategory){
+        const updatedSelectedProducts = products.filter((product) => product?.category === selectedCategory);
+        setSelectedProducts(updatedSelectedProducts);
+        } else {
+            setSelectedProducts(products);
+        }
+    }, [selectedCategory]);
+    
+
     const renderCategoryItem = ({ item }) => {
         return (
-            <CategoryBox title={item.title} image={item.image} />
+            <CategoryBox onPress={() => setSelectedCategory(item?.id)}
+            isSelected={selectedCategory === item.id} 
+            title={item.title} image={item.image} />
         );
     };
     
@@ -30,7 +45,7 @@ const Home = () => {
             <Header showSearch={true} title="Find All You Need" />
             <FlatList showHorizontalScrollIndicator={false} style={styles.list} horizontal data={categories} renderItem={renderCategoryItem} keyExtractor={(item, index) =>
             String(index)} />
-            <FlatList numColumns={2} data={products} renderItem={renderProductItem} 
+            <FlatList numColumns={2} data={selectedProducts} renderItem={renderProductItem} 
             keyExtractor={(item) => String(item.id)} ListFooterComponent={<View style={{ height: 250 }} />} />
         </View>
         </SafeAreaView>
