@@ -52,4 +52,15 @@ export const styles = StyleSheet.create({
         width: 24,
         height: 24,
     },
+    backContainer: {
+        backgroundColor: colors.white,
+        position: 'absolute',
+        borderRadius: 8,
+        margin: 24,
+        padding: 10,
+    },
+    backIcon: {
+        width: 24,
+        height: 24,
+    },
 });

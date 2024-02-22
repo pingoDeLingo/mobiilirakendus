@@ -5,11 +5,17 @@ import { styles } from "./styles";
 import { products } from "../../../data/products";
 import FavoriteItem from "../../../components/FavoriteItem";
 import Header from "../../../components/Header";
+import { useNavigation } from "@react-navigation/native";
 
 const Favorites = () => {
+  const navigation = useNavigation();
   const renderItem = ({ item }) => {
+    const onProductPress = () => {
+      navigation.navigate("ProductDetails", { product
+      : item });
+    };
     return (
-      <FavoriteItem
+      <FavoriteItem onPress={onProductPress}
         {...item}
       />
     );
