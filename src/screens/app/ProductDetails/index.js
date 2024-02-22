@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useRoute } from "@react-navigation/native";
 import Button from "../../../components/Button";
 import { useNavigation } from '@react-navigation/native';
+import ImageCarousel from "../../../components/ImageCarousel";
 
 const ProductDetails = () => {
   const navigation = useNavigation();
@@ -18,7 +19,11 @@ const ProductDetails = () => {
   return (
     <SafeAreaView style={styles.save}>
         <ScrollView>
-            <Image source={{uri: product?.image}} style={styles.image} />
+            {product?.images?.length ? (
+            <ImageCarousel images={product?.images} />
+            ) : (
+              <Image source={{uri: product?.image}} style={styles.image} />
+            )}
             <View style={styles.content}>
                 <Text style={styles.title}>{product?.title}</Text>
                 <Text style={styles.price}>{product?.price}</Text>
